@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Rutina Semanal de Calistenia para Principiantes</title>
+    <style>
+        :root {
+            /* Paleta de colores ajustada para un tono más vivo y profesional */
+            --primary: #2980b9; /* Azul más profundo */
+            --secondary: #3498db; /* Azul cielo */
+            --accent: #e74c3c; /* Rojo para destacar (¡cuidado y fuerza!) */
+            --light: #ecf0f1; /* Gris claro */
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            /* Gradiente de fondo más profesional */
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem; /* Más espacio para impacto visual */
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .intro, .tips-section, .progress-tracker {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Sombra más suave */
+        }
+        
+        .intro h2, .tips-section h2, .progress-tracker h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        
+        .week-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .day-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd; /* Borde sutil */
+        }
+        
+        .day-card:hover {
+            transform: translateY(-8px); /* Efecto 3D más pronunciado */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .day-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            border-bottom: 3px solid var(--accent); /* Línea de acento */
+        }
+        
+        .day-content {
+            padding: 1.5rem;
+        }
+        
+        .exercise-list {
+            list-style-type: none;
+        }
+        
+        .exercise-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed #ccc; /* Separador más suave */
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s, padding 0.2s;
+        }
+        
+        .exercise-item:hover {
+            background-color: var(--light);
+            border-radius: 5px;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+        
+        .exercise-icon {
+            background-color: var(--accent); /* Icono de acento */
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .exercise-details h4 {
+            margin-bottom: 0.2rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .exercise-details p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Estilos del Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 62, 80, 0.85); /* Oscurecer más el fondo */
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(4px); /* Efecto moderno */
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 750px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease-out; /* Animación al aparecer */
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+        
+        .exercise-detail h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .exercise-steps, .exercise-tips {
+            margin: 2rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .exercise-steps {
+            background-color: var(--light);
+        }
+        
+        .exercise-steps h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .exercise-steps ol {
+            margin-left: 1.5rem;
+            padding-left: 0.5rem;
+        }
+        
+        .exercise-steps li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .exercise-tips {
+            background-color: #fcf3f2; /* Tono de acento muy claro */
+            border: 1px solid #f6caca;
+        }
+        
+        .exercise-tips h4 {
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .exercise-tips ul {
+            list-style-type: '💡 '; /* Usar un emoji como bullet point */
+            margin-left: 1.5rem;
+        }
+        
+        /* Estilos de Tips */
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+        
+        .tip-icon {
+            background-color: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Estilos de Formularios */
+        .progress-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        select, textarea, button {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--success); /* Botón de éxito en verde */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            font-weight: 700;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        button:hover {
+            background-color: #27ae60; /* Verde más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+        }
+
+        /* Estilo para destacar el nombre en el footer */
+        .footer-design-credit {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .week-schedule {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✨ Rutina Semanal de Calistenia para Principiantes</h1>
+        <p class="subtitle">Tu plan estructurado para mejorar **fuerza y flexibilidad** desde cero. ¡Enfocado en alcanzar la punta de tus pies! 🎯</p>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <h2>📝 Tu Plan de Entrenamiento Semanal</h2>
+            <p>Esta rutina está diseñada específicamente para principiantes con **baja** forma física. Combina ejercicios de fuerza con sesiones de movilidad y flexibilidad para ayudarte a progresar de manera segura y efectiva.</p>
+            <p><strong>Filosofía:</strong> Progresión, no perfección. Escucha a tu cuerpo. La consistencia es clave. 🔑</p>
+            <p><strong>Instrucción:</strong> Haz clic en cualquier ejercicio para ver instrucciones detalladas de cómo realizarlo correctamente. 👇</p>
+        </section>
+        
+        <section class="week-schedule">
+            <div class="day-card">
+                <div class="day-header">💪 Día 1: Fuerza (Parte Superior)</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="flexiones-inclinadas">
+                            <div class="exercise-icon">1</div>
+                            <div class="exercise-details">
+                                <h4>Flexiones Inclinadas</h4>
+                                <p>8-12 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="dominadas-isometricas">
+                            <div class="exercise-icon">2</div>
+                            <div class="exercise-details">
+                                <h4>Dominadas Isométricas</h4>
+                                <p>3-5 repeticiones de 10-15 segundos × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="sentadillas-soporte">
+                            <div class="exercise-icon">3</div>
+                            <div class="exercise-details">
+                                <h4>Sentadillas con Soporte</h4>
+                                <p>10-15 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="plancha-antebrazos">
+                            <div class="exercise-icon">4</div>
+                            <div class="exercise-details">
+                                <h4>Plancha de Antebrazos</h4>
+                                <p>20-30 segundos × 3 series</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">🤸 Día 2: Movilidad y Flexibilidad</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="gato-vaca">
+                            <div class="exercise-icon">1</div>
+                            <div class="exercise-details">
+                                <h4>Gato-Vaca</h4>
+                                <p>10 repeticiones lentas</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="estiron-rana">
+                            <div class="exercise-icon">2</div>
+                            <div class="exercise-details">
+                                <h4>Estiramiento de Rana 🐸</h4>
+                                <p>30 segundos</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="estiron-isquiotibial">
+                            <div class="exercise-icon">3</div>
+                            <div class="exercise-details">
+                                <h4>Estiramiento de Isquiotibial</h4>
+                                <p>40 segundos por pierna</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="inclinaciones-pelvicas">
+                            <div class="exercise-icon">4</div>
+                            <div class="exercise-details">
+                                <h4>Inclinaciones Pélvicas</h4>
+                                <p>10 repeticiones</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">🦵 Día 3: Fuerza (Parte Inferior y Core)</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="sentadillas-asiento">
+                            <div class="exercise-icon">1</div>
+                            <div class="exercise-details">
+                                <h4>Sentadillas al Asiento</h4>
+                                <p>8-12 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="zancadas-asistidas">
+                            <div class="exercise-icon">2</div>
+                            <div class="exercise-details">
+                                <h4>Zancadas Asistidas</h4>
+                                <p>6-10 repeticiones por pierna × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="puente-gluteos">
+                            <div class="exercise-icon">3</div>
+                            <div class="exercise-details">
+                                <h4>Puente de Glúteos</h4>
+                                <p>12-15 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="plancha-lateral">
+                            <div class="exercise-icon">4</div>
+                            <div class="exercise-details">
+                                <h4>Plancha Lateral (Modificada)</h4>
+                                <p>20-30 segundos por lado × 3 series</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">🧘 Día 4: Descanso Activo</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="caminata">
+                            <div class="exercise-icon">A</div>
+                            <div class="exercise-details">
+                                <h4>Caminata 🚶‍♀️</h4>
+                                <p>20-30 minutos a paso ligero</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="movilidad-opcional">
+                            <div class="exercise-icon">B</div>
+                            <div class="exercise-details">
+                                <h4>Movilidad (Opcional)</h4>
+                                <p>Repetir rutina del Día 2 o yoga suave</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">🏋️‍♀️ Día 5: Fuerza (Cuerpo Completo)</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="sentadillas-soporte">
+                            <div class="exercise-icon">1</div>
+                            <div class="exercise-details">
+                                <h4>Sentadillas con Soporte</h4>
+                                <p>10-12 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="flexiones-inclinadas">
+                            <div class="exercise-icon">2</div>
+                            <div class="exercise-details">
+                                <h4>Flexiones Inclinadas</h4>
+                                <p>8-10 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="puente-gluteos">
+                            <div class="exercise-icon">3</div>
+                            <div class="exercise-details">
+                                <h4>Puente de Glúteos</h4>
+                                <p>12-15 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="remo-toalla">
+                            <div class="exercise-icon">4</div>
+                            <div class="exercise-details">
+                                <h4>Remo con Toalla</h4>
+                                <p>8-10 repeticiones × 3 series</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">🤸‍♀️ Día 6: Flexibilidad Profunda</div>
+                <div class="day-content">
+                    <ul class="exercise-list">
+                        <li class="exercise-item" data-exercise="estiron-isquiotibial">
+                            <div class="exercise-icon">1</div>
+                            <div class="exercise-details">
+                                <h4>Estiramiento de Isquiotibial</h4>
+                                <p>45-60 segundos por pierna</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="plegado-adelante">
+                            <div class="exercise-icon">2</div>
+                            <div class="exercise-details">
+                                <h4>Plegado Hacia Adelante Sentado</h4>
+                                <p>60 segundos</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="postura-nino">
+                            <div class="exercise-icon">3</div>
+                            <div class="exercise-details">
+                                <h4>Postura del Niño 👶</h4>
+                                <p>60 segundos</p>
+                            </div>
+                        </li>
+                        <li class="exercise-item" data-exercise="estiron-mariposa">
+                            <div class="exercise-icon">4</div>
+                            <div class="exercise-details">
+                                <h4>Estiramiento de Mariposa 🦋</h4>
+                                <p>45 segundos</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="day-card">
+                <div class="day-header">😴 Día 7: Descanso Total</div>
+                <div class="day-content">
+                    <p>Tu cuerpo necesita tiempo para recuperarse y fortalecerse. Descansa completamente hoy. ¡Prepárate para la próxima semana! 🎉</p>
+                </div>
+            </div>
+        </section>
+        
+        <div id="exercise-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="exercise-detail" class="exercise-detail">
+                    </div>
+            </div>
+        </div>
+        
+        <section class="tips-section">
+            <h2>💡 Consejos Clave para Tu Progreso</h2>
+            <div class="tip-item">
+                <div class="tip-icon">🤸‍♀️</div>
+                <div class="tip-details">
+                    <h4>Flexibilidad Diaria</h4>
+                    <p>Intenta hacer el estiramiento de isquiotibiales y el plegado hacia adelante sentado todos los días, aunque sea solo por 2 minutos. La constancia gana al volumen.</p>
+                </div>
+            </div>
+            <div class="tip-item">
+                <div class="tip-icon">🌬️</div>
+                <div class="tip-details">
+                    <h4>Respira Correctamente</h4>
+                    <p>Nunca contengas la respiración durante los estiramientos. Inhala profundamente y, al exhalar, intenta relajarte un poco más en la postura.</p>
+                </div>
+            </div>
+            <div class="tip-item">
+                <div class="tip-icon">❌</div>
+                <div class="tip-details">
+                    <h4>Sin Rebotes</h4>
+                    <p>Los estiramientos deben ser estáticos y mantenidos. Evita los "rebotes", que pueden causar lesiones. Mantente quieto y profundo.</p>
+                </div>
+            </div>
+            <div class="tip-item">
+                <div class="tip-icon">💧</div>
+                <div class="tip-details">
+                    <h4>Hidratación y Alimentación</h4>
+                    <p>Bebe suficiente agua y lleva una alimentación equilibrada. Tu cuerpo necesita combustible para mejorar y tus músculos agua para estirarse.</p>
+                </div>
+            </div>
+            <div class="tip-item">
+                <div class="tip-icon">📈</div>
+                <div class="tip-details">
+                    <h4>Registra tu Progreso</h4>
+                    <p>Una vez a la semana, intenta tocarte los pies (sin forzar). Verás cómo, poco a poco, vas llegando más lejos. ¡El progreso es motivación!</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="progress-tracker">
+            <h2>📊 Registra Tu Progreso</h2>
+            <form class="progress-form">
+                <div class="form-group">
+                    <label for="week-select">Semana:</label>
+                    <select id="week-select">
+                        <option value="1">Semana 1</option>
+                        <option value="2">Semana 2</option>
+                        <option value="3">Semana 3</option>
+                        <option value="4">Semana 4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="flexibility-select">¿Qué tan cerca estás de tocar tus pies? (Objetivo: Tocar la punta) 🎯</label>
+                    <select id="flexibility-select">
+                        <option value="1">Todavía muy lejos</option>
+                        <option value="2">Puedo tocar mis tobillos</option>
+                        <option value="3">Puedo tocar la parte superior de mis pies</option>
+                        <option value="4">¡Puedo tocar la punta de mis pies!</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notas de la semana: ✍️</label>
+                    <textarea id="notes" rows="3" placeholder="¿Cómo te sentiste? ¿Algún ejercicio te resultó especialmente difícil? ¿Dormiste bien?"></textarea>
+                </div>
+                <button type="button" id="save-progress">Guardar Progreso ✅</button>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Rutina de Calistenia para Principiantes - Diseñada para mejorar fuerza y flexibilidad</p>
+        <p class="footer-design-credit">✨ **Diseñado por William Salazar** ✨</p>
+        <p>Recuerda: La consistencia es más importante que la intensidad. ¡Tú puedes! 💪</p>
+    </footer>
+
+    <script>
+        // ***********************************************
+        // DATOS DE LOS EJERCICIOS (sin URLs de imagen)
+        // ***********************************************
+        const exerciseData = {
+            "flexiones-inclinadas": {
+                title: "Flexiones Inclinadas",
+                description: "Ejercicio para fortalecer pecho, hombros y tríceps. Versión modificada para principiantes. Cuanto más vertical el cuerpo, más fácil.",
+                steps: [
+                    "Busca una superficie elevada y estable como una mesa, silla resistente o la pared.",
+                    "Coloca las manos en el borde de la superficie, ligeramente más abiertas que el ancho de los hombros.",
+                    "Camina con los pies hacia atrás hasta que tu cuerpo forme una línea recta desde la cabeza hasta los talones.",
+                    "Mantén el core apretado y los glúteos contraídos.",
+                    "Dobla los codos para bajar el pecho hacia la superficie.",
+                    "Baja controladamente hasta que el pecho casi toque la superficie.",
+                    "Empuja con fuerza para volver a la posición inicial.",
+                    "Repite para el número de repeticiones indicado."
+                ],
+                tips: [
+                    "Cuanto más vertical esté tu cuerpo, más fácil será el ejercicio.",
+                    "Mantén los codos cerca del cuerpo durante el movimiento (si buscas enfocar el tríceps).",
+                    "No dejes que la cadera se hunda o se eleve demasiado.",
+                    "Respira inhalando al bajar y exhalando al subir."
+                ]
+            },
+            "dominadas-isometricas": {
+                title: "Dominadas Isométricas (Aguante)",
+                description: "Ejercicio para desarrollar fuerza de espalda y brazos, preparándote para dominadas completas. Concéntrate en la tensión máxima.",
+                steps: [
+                    "Busca una barra baja o el marco de una puerta resistente.",
+                    "Agárrate con las palmas hacia ti (agarre supino) o hacia afuera (agarre prono).",
+                    "**Salta o ayúdate** para alcanzar la posición superior, con tu barbilla a la altura de la barra.",
+                    "Mantén la posición superior entre 10-15 segundos, apretando fuerte la espalda y los brazos.",
+                    "Baja controladamente a la posición inicial (si es posible, tardando 3-5 segundos).",
+                    "Descansa y repite para el número de series indicado."
+                ],
+                tips: [
+                    "Concéntrate en apretar los omóplatos y la espalda.",
+                    "El descenso lento (dominada negativa) es clave para la progresión a la dominada completa.",
+                    "Mantén el core apretado para evitar el balanceo.",
+                    "No dejes que los hombros se encorven hacia las orejas."
+                ]
+            },
+            "sentadillas-soporte": {
+                title: "Sentadillas con Soporte",
+                description: "Ejercicio fundamental para piernas y glúteos, con soporte para mantener el equilibrio y la forma correcta.",
+                steps: [
+                    "Párate frente a una silla o pared, separando los pies al ancho de los hombros.",
+                    "Sujétate ligeramente del respaldo de la silla o de la pared para mantener el equilibrio.",
+                    "Mantén el pecho alto y la espalda recta durante todo el movimiento.",
+                    "Dobla las rodillas y cadera como si fueras a sentarte en una silla.",
+                    "Baja lo más que puedas manteniendo una buena forma (talones en el suelo, rodillas alineadas con los pies).",
+                    "En la posición más baja, tus muslos deben estar paralelos al suelo o lo más cerca posible.",
+                    "Empuja con los talones para volver a la posición inicial.",
+                    "Repite para el número de repeticiones indicado."
+                ],
+                tips: [
+                    "Mira hacia adelante para mantener la espalda recta.",
+                    "Asegúrate de que las rodillas no se doblen hacia adentro.",
+                    "Usa el soporte solo para equilibrio, no para ayudarte a subir.",
+                    "Exhala al subir, inhala al bajar."
+                ]
+            },
+            "plancha-antebrazos": {
+                title: "Plancha de Antebrazos (El 'Plank')",
+                description: "Ejercicio isométrico excelente para fortalecer el core completo, incluyendo abdominales, espalda baja y oblicuos. Es la base de un core fuerte.",
+                steps: [
+                    "Colócate en el suelo boca abajo.",
+                    "Apoya los antebrazos en el suelo, con los codos directamente debajo de los hombros.",
+                    "Las manos pueden estar juntas o separadas, lo que te resulte más cómodo.",
+                    "Levanta el cuerpo apoyando solo los antebrazos y las puntas de los pies.",
+                    "Mantén el cuerpo en una línea recta desde la cabeza hasta los talones.",
+                    "Contrae el abdomen y los glúteos para evitar que la cadera se hunda o se eleve.",
+                    "Mantén la posición durante el tiempo indicado.",
+                    "Respira normalmente durante todo el ejercicio."
+                ],
+                tips: [
+                    "No contengas la respiración.",
+                    "Si duele la espalda baja, probablemente estás dejando caer la cadera: aprieta más los glúteos.",
+                    "Para hacerlo más fácil, puedes apoyar las rodillas en el suelo (Plancha Modificada).",
+                    "Mira hacia el suelo, no hacia adelante, para mantener el cuello alineado."
+                ]
+            },
+            "gato-vaca": {
+                title: "Gato-Vaca (Cat-Cow)",
+                description: "Ejercicio de movilidad para la columna vertebral que ayuda a mejorar la flexibilidad y aliviar la tensión en la espalda. Ideal para calentamiento.",
+                steps: [
+                    "Colócate en el suelo en posición de cuadrupedia (manos y rodillas).",
+                    "Las manos deben estar directamente debajo de los hombros, y las rodillas debajo de las caderas.",
+                    "Para la postura de 'vaca': inhala y deja caer el abdomen hacia el suelo, elevando la cabeza y el coxis.",
+                    "Para la postura de 'gato': exhala y redondea la espalda hacia el techo, metiendo la barbilla hacia el pecho.",
+                    "Alterna entre estas dos posiciones de forma fluida y controlada.",
+                    "Realiza el número de repeticiones indicado, coordinando la respiración con el movimiento."
+                ],
+                tips: [
+                    "Haz los movimientos lentamente y con control.",
+                    "Concéntrate en sentir cada vértebra moviéndose.",
+                    "No fuerces el movimiento.",
+                    "Usa la respiración para profundizar en cada postura."
+                ]
+            },
+            "estiron-rana": {
+                title: "Estiramiento de Rana 🐸 (Frog Stretch)",
+                description: "Estiramiento profundo para las ingles y caderas que mejora la flexibilidad en la zona pélvica. Fundamental para la movilidad de la cadera.",
+                steps: [
+                    "Comienza en posición de cuadrupedia (manos y rodillas).",
+                    "Separa lentamente las rodillas hacia los lados, lo más que puedas cómodamente.",
+                    "Los empeines de los pies deben quedar hacia afuera, con las plantas mirándose.",
+                    "Baja lentamente las caderas hacia atrás, hacia los talones, hasta sentir un estiramiento tolerable.",
+                    "Puedes apoyar los antebrazos en el suelo para mayor comodidad.",
+                    "Mantén la posición durante el tiempo indicado, respirando profundamente.",
+                    "Para salir, lleva suavemente las rodillas juntas y vuelve a la posición inicial."
+                ],
+                tips: [
+                    "No fuerces el estiramiento más allá de un nivel 7 de 10 de incomodidad.",
+                    "Respira profundamente y relájate en la postura.",
+                    "Si sientes dolor en las rodillas, coloca una manta doblada debajo de ellas.",
+                    "Con el tiempo, podrás bajar más las caderas."
+                ]
+            },
+            "estiron-isquiotibial": {
+                title: "Estiramiento de Isquiotibial (Sentado)",
+                description: "Estiramiento fundamental para mejorar la flexibilidad de la parte posterior de los muslos, ¡clave para tocar los pies!",
+                steps: [
+                    "Siéntate en el suelo con una pierna extendida y la otra doblada con el pie contra el muslo opuesto.",
+                    "Mantén la espalda lo más recta posible.",
+                    "Inclínate hacia adelante desde las caderas (movimiento de bisagra), no desde la cintura.",
+                    "Alcanza hacia el pie de la pierna extendida, agarrándote donde llegues.",
+                    "Mantén la pierna extendida, pero sin bloquear la rodilla completamente.",
+                    "Siente el estiramiento en la parte posterior del muslo.",
+                    "Mantén la posición durante el tiempo indicado, respirando profundamente.",
+                    "Repite con la otra pierna."
+                ],
+                tips: [
+                    "No rebotes; mantén el estiramiento estático.",
+                    "Si no llegas al pie, usa una toalla o banda alrededor del pie.",
+                    "Exhala mientras te inclinas hacia adelante para profundizar el estiramiento.",
+                    "No redondees demasiado la espalda; concéntrate en doblarte desde las caderas."
+                ]
+            },
+            "inclinaciones-pelvicas": {
+                title: "Inclinaciones Pélvicas (Tilts)",
+                description: "Ejercicio sutil pero efectivo para mejorar la conciencia y control de la pelvis, importante para la postura y salud de la espalda.",
+                steps: [
+                    "Acuéstate boca arriba con las rodillas dobladas y los pies apoyados en el suelo.",
+                    "Coloca los brazos a los lados con las palmas hacia abajo.",
+                    "Inhala y permite que la parte baja de la espalda se separe ligeramente del suelo (Arco).",
+                    "Exhala y aplana la espalda baja contra el suelo, contrayendo los abdominales.",
+                    "La pelvis debe inclinarse ligeramente hacia arriba, como si metieras el coxis.",
+                    "Mantén la contracción abdominal durante un par de segundos.",
+                    "Relaja y repite para el número de repeticiones indicado."
+                ],
+                tips: [
+                    "El movimiento es pequeño; no fuerces excesivamente.",
+                    "Concéntrate en la calidad del movimiento, no en la cantidad.",
+                    "Respira coordinadamente con el movimiento.",
+                    "Este ejercicio es excelente para preparar el core antes de ejercicios de fuerza."
+                ]
+            },
+            "sentadillas-asiento": {
+                title: "Sentadillas al Asiento (Sit-to-Stand)",
+                description: "Ejercicio funcional para fortalecer piernas y glúteos, ideal para principiantes o personas con movilidad reducida.",
+                steps: [
+                    "Siéntate en una silla estable, con los pies separados al ancho de los hombros.",
+                    "Mantén el pecho alto y la espalda recta.",
+                    "Inclínate ligeramente hacia adelante desde las caderas.",
+                    "Empuja con los talones para levantarte de la silla sin usar las manos.",
+                    "Párate completamente, contrayendo los glúteos en la parte superior.",
+                    "Para sentarte, dobla las caderas y rodillas, bajando controladamente.",
+                    "Toca ligeramente la silla con los glúteos antes de levantarte de nuevo.",
+                    "Repite para el número de repeticiones indicado."
+                ],
+                tips: [
+                    "Usa una silla con la altura adecuada; tus rodillas deben estar en un ángulo de 90° cuando estés sentado.",
+                    "Si es necesario, usa las manos al principio para ayudarte, pero el objetivo es progresar a 'Sin Manos'.",
+                    "Concéntrate en usar los músculos de las piernas, no el impulso.",
+                    "A medida que te fortalezcas, usa una silla más baja o no uses las manos."
+                ]
+            },
+            "zancadas-asistidas": {
+                title: "Zancadas Asistidas (Lunge)",
+                description: "Ejercicio para fortalecer piernas y glúteos, con soporte para mantener el equilibrio y la forma correcta.",
+                steps: [
+                    "Párate frente a una silla o pared para apoyarte.",
+                    "Da un paso adelante con una pierna, manteniendo la otra en su lugar.",
+                    "Baja la rodilla trasera hacia el suelo, manteniendo la rodilla delantera alineada con el tobillo.",
+                    "Baja hasta que el muslo delantero esté paralelo al suelo o lo más cerca posible.",
+                    "Mantén el torso erguido durante todo el movimiento.",
+                    "Empuja con el pie delantero para volver a la posición inicial.",
+                    "Repite con la misma pierna para el número de repeticiones indicado.",
+                    "Cambia de pierna y repite."
+                ],
+                tips: [
+                    "Mantén el core apretado para mayor estabilidad.",
+                    "No dejes que la rodilla delantera sobrepase los dedos del pie.",
+                    "Mira hacia adelante, no hacia abajo.",
+                    "Si tienes problemas de rodilla, no bajes demasiado (Rango de Movimiento Parcial)."
+                ]
+            },
+            "puente-gluteos": {
+                title: "Puente de Glúteos (Glute Bridge)",
+                description: "Ejercicio excelente para fortalecer glúteos, isquiotibiales y espalda baja. Es clave para la estabilidad de la pelvis.",
+                steps: [
+                    "Acuéstate boca arriba con las rodillas dobladas y los pies apoyados en el suelo.",
+                    "Coloca los brazos a los lados con las palmas hacia abajo.",
+                    "Los pies deben estar separados al ancho de las caderas, cerca de los glúteos.",
+                    "Contrae los glúteos y el abdomen.",
+                    "Eleva las caderas hacia el techo hasta que el cuerpo forme una línea recta desde los hombros hasta las rodillas.",
+                    "Mantén la posición superior durante un segundo, apretando los glúteos al máximo.",
+                    "Baja controladamente a la posición inicial.",
+                    "Repite para el número de repeticiones indicado."
+                ],
+                tips: [
+                    "No arquees excesivamente la espalda en la posición superior.",
+                    "Concéntrate en usar los glúteos, no la espalda baja.",
+                    "Mantén los hombros relajados y apoyados en el suelo.",
+                    "Para mayor intensidad, puedes levantar una pierna en la posición superior (Puente Unilateral)."
+                ]
+            },
+            "plancha-lateral": {
+                title: "Plancha Lateral Modificada",
+                description: "Ejercicio para fortalecer los oblicuos y mejorar la estabilidad del core, versión modificada para principiantes.",
+                steps: [
+                    "Acuéstate de lado con las piernas juntas y dobladas en las rodillas.",
+                    "Apoya el antebrazo inferior en el suelo, con el codo directamente debajo del hombro.",
+                    "Coloca la mano superior en la cadera o estírala hacia el techo.",
+                    "Levanta las caderas del suelo hasta que el cuerpo forme una línea recta desde la cabeza hasta las rodillas.",
+                    "Mantén la posición durante el tiempo indicado.",
+                    "Baja controladamente y repite del otro lado.",
+                    "Asegúrate de hacer ambos lados por igual."
+                ],
+                tips: [
+                    "Mantén el core apretado durante todo el ejercicio.",
+                    "No dejes que las caderas se hundan hacia el suelo.",
+                    "Respira normalmente durante la posición.",
+                    "Para mayor desafío, puedes extender las piernas completamente (Plancha Lateral Estándar)."
+                ]
+            },
+            "caminata": {
+                title: "Caminata 🚶‍♀️",
+                description: "Actividad cardiovascular de bajo impacto que mejora la salud general y ayuda en la recuperación activa.",
+                steps: [
+                    "Usa calzado cómodo y apropiado para caminar.",
+                    "Mantén una postura erguida con los hombros relajados.",
+                    "Camina a un paso que te permita mantener una conversación (ritmo ligero a moderado).",
+                    "Balancea los brazos naturalmente mientras caminas.",
+                    "Respira profundamente y de forma regular.",
+                    "Mantén el ritmo durante 20-30 minutos.",
+                    "Puedes variar la ruta para hacerlo más interesante.",
+                    "Estira ligeramente al terminar."
+                ],
+                tips: [
+                    "Hidrátate antes, durante y después de caminar.",
+                    "Si es posible, camina en un terreno variado para trabajar diferentes músculos.",
+                    "Escucha música o podcasts para hacer el tiempo más ameno.",
+                    "Aumenta gradualmente la distancia o velocidad con el tiempo."
+                ]
+            },
+            "movilidad-opcional": {
+                title: "Movilidad (Opcional) 🧘",
+                description: "Sesión de recuperación activa que puedes realizar según cómo te sientas. Es tu oportunidad de 'jugar' con la flexibilidad.",
+                steps: [
+                    "Puedes repetir la rutina completa del Día 2 (Movilidad y Flexibilidad).",
+                    "O realizar una sesión de yoga suave para principiantes (busca en YouTube 'Yoga para principiantes' o 'Yoga para flexibilidad').",
+                    "Realiza los movimientos de forma lenta y controlada.",
+                    "Concéntrate en la respiración profunda.",
+                    "No fuerces ningún movimiento que cause dolor.",
+                    "Disfruta del proceso de conectar con tu cuerpo.",
+                    "Termina con unos minutos de relajación."
+                ],
+                tips: [
+                    "Escucha a tu cuerpo; si estás muy cansado, es mejor descansar completamente.",
+                    "La movilidad es tan importante como la fuerza para el progreso a largo plazo.",
+                    "Usa esta sesión para trabajar en tus áreas más rígidas.",
+                    "Mantén una actitud de curiosidad y exploración, no de rendimiento."
+                ]
+            },
+            "remo-toalla": {
+                title: "Remo con Toalla (Towel Row)",
+                description: "Ejercicio para fortalecer la espalda y brazos usando una toalla como resistencia. Excelente sustituto de las poleas.",
+                steps: [
+                    "Consigue una toalla larga y resistente.",
+                    "Anuda la toalla alrededor del pomo de una puerta cerrada de manera segura.",
+                    "Siéntate en el suelo frente a la puerta con las piernas extendidas (o dobladas para más fácil).",
+                    "Sujeta los extremos de la toalla con ambas manos.",
+                    "Mantén la espalda recta y el pecho alto.",
+                    "Tira de la toalla hacia tu pecho, apretando los omóplatos.",
+                    "Mantén la posición un segundo cuando la toalla toque tu pecho.",
+                    "Vuelve controladamente a la posición inicial y repite."
+                ],
+                tips: [
+                    "Asegúrate de que la puerta esté bien cerrada y sea resistente.",
+                    "Concéntrate en usar los músculos de la espalda, no solo los brazos.",
+                    "Mantén los hombros relajados, lejos de las orejas.",
+                    "Para mayor intensidad, inclínate más hacia atrás o usa una toalla más corta."
+                ]
+            },
+            "plegado-adelante": {
+                title: "Plegado Hacia Adelante Sentado",
+                description: "Estiramiento profundo para toda la cadena posterior, especialmente isquiotibiales y espalda. ¡Directo a tocar la punta de los pies!",
+                steps: [
+                    "Siéntate en el suelo con ambas piernas extendidas frente a ti.",
+                    "Mantén la espalda lo más recta posible.",
+                    "Inhala profundamente y alarga la columna.",
+                    "Exhala y dóblate hacia adelante desde las caderas, no desde la cintura.",
+                    "Alcanza hacia tus pies, tobillos o espinillas, donde llegues cómodamente.",
+                    "Mantén las piernas extendidas pero sin bloquear las rodillas.",
+                    "Relaja la cabeza y el cuello.",
+                    "Mantén la posición durante el tiempo indicado, respirando profundamente."
+                ],
+                tips: [
+                    "No te preocupes por llegar a los pies; concéntrate en la sensación de estiramiento.",
+                    "Si es necesario, dobla ligeramente las rodillas para evitar redondear la espalda.",
+                    "Con cada exhalación, intenta relajarte un poco más en la postura.",
+                    "No rebotes; mantén el estiramiento estático y constante."
+                ]
+            },
+            "postura-nino": {
+                title: "Postura del Niño 👶 (Balasana)",
+                description: "Postura de yoga restaurativa que estira suavemente la espalda, caderas y muslos. Ideal para el final de la sesión.",
+                steps: [
+                    "Arrodíllate en el suelo con las rodillas separadas al ancho de las caderas.",
+                    "Junta los dedos gordos de los pies para que se toquen.",
+                    "Siéntate sobre los talones.",
+                    "Exhala y dóblate hacia adelante, bajando el torso entre los muslos.",
+                    "Extiende los brazos hacia adelante o colócalos a los lados con las palmas hacia arriba.",
+                    "Apoya la frente suavemente en el suelo.",
+                    "Relaja completamente el cuerpo.",
+                    "Mantén la posición durante el tiempo indicado, respirando profundamente."
+                ],
+                tips: [
+                    "Si la frente no llega al suelo, usa un cojín o bloque de yoga.",
+                    "Si tienes problemas en las rodillas, coloca una manta doblada detrás de ellas.",
+                    "Esta postura es excelente para calmar la mente y reducir el estrés.",
+                    "Con los brazos extendidos, sentirás un estiramiento en la espalda y hombros."
+                ]
+            },
+            "estiron-mariposa": {
+                title: "Estiramiento de Mariposa 🦋 (Baddha Konasana)",
+                description: "Estiramiento para las ingles y caderas que mejora la flexibilidad en la zona pélvica. Importante para prevenir lesiones de rodilla.",
+                steps: [
+                    "Siéntate en el suelo con la espalda recta.",
+                    "Dobla las rodillas y junta las plantas de los pies.",
+                    "Acerca los talones hacia el cuerpo lo más que puedas cómodamente.",
+                    "Sujeta los pies con las manos.",
+                    "Mantén la espalda recta y el pecho alto.",
+                    "Presiona suavemente las rodillas hacia el suelo usando los codos (o solo la gravedad).",
+                    "Siente el estiramiento en la parte interna de los muslos.",
+                    "Mantén la posición durante el tiempo indicado, respirando profundamente."
+                ],
+                tips: [
+                    "No forces las rodillas hacia abajo; deja que la gravedad haga el trabajo.",
+                    "Si te cuesta mantener la espalda recta, siéntate sobre una manta doblada.",
+                    "Con el tiempo, podrás acercar más los talones al cuerpo.",
+                    "Este estiramiento es excelente para mejorar la flexibilidad para sentadillas y zancadas."
+                ]
+            }
+        };
+
+        // Elementos del DOM
+        const modal = document.getElementById('exercise-modal');
+        const exerciseDetail = document.getElementById('exercise-detail');
+        const closeBtn = document.querySelector('.close-btn');
+        const exerciseItems = document.querySelectorAll('.exercise-item');
+        const saveProgressBtn = document.getElementById('save-progress');
+
+        // Mostrar modal con detalles del ejercicio
+        exerciseItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const exerciseId = this.getAttribute('data-exercise');
+                const exercise = exerciseData[exerciseId];
+                
+                if (exercise) {
+                    // Construir el contenido del modal (SIN IMAGEN)
+                    let content = `
+                        <h3>${exercise.title}</h3>
+                        <p><strong>Descripción:</strong> ${exercise.description}</p>
+                        <div class="exercise-steps">
+                            <h4>Cómo realizarlo:</h4>
+                            <ol>
+                    `;
+                    
+                    exercise.steps.forEach(step => {
+                        content += `<li>${step}</li>`;
+                    });
+                    
+                    content += `
+                            </ol>
+                        </div>
+                        <div class="exercise-tips">
+                            <h4>Consejos importantes:</h4>
+                            <ul>
+                    `;
+                    
+                    exercise.tips.forEach(tip => {
+                        content += `<li>${tip}</li>`;
+                    });
+                    
+                    content += `
+                            </ul>
+                        </div>
+                    `;
+                    
+                    exerciseDetail.innerHTML = content;
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Guardar progreso
+        saveProgressBtn.addEventListener('click', function() {
+            const week = document.getElementById('week-select').value;
+            const flexibility = document.getElementById('flexibility-select').value;
+            const notes = document.getElementById('notes').value;
+            
+            // En una aplicación real, aquí guardarías los datos
+            // Por ahora, solo mostraremos una alerta
+            alert(`¡Progreso guardado para la Semana ${week}! ¡Sigue así! 💪`);
+            
+            // Limpiar el formulario
+            document.getElementById('notes').value = '';
+        });
+    </script>
+</body>
+</html>
